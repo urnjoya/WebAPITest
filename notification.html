@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PWA Notification Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    button {
+      padding: 16px 24px;
+      font-size: 16px;
+      border-radius: 12px;
+      border: none;
+      background: #22c55e;
+      color: #000;
+      cursor: pointer;
+    }
+    button:active {
+      transform: scale(0.97);
+    }
+  </style>
+</head>
+<body>
+
+<button onclick="showNotification()">Show Notification</button>
+
+<script>
+async function showNotification() {
+
+  if (!("Notification" in window)) {
+    alert("Notifications not supported");
+    return;
+  }
+
+  let permission = Notification.permission;
+
+  if (permission !== "granted") {
+    permission = await Notification.requestPermission();
+  }
+
+  if (permission === "granted") {
+
+    const notification = new Notification("Welcome 👋", {
+      body: "This is a custom PWA notification with actions.",
+      icon: "https://cdn-icons-png.flaticon.com/512/1827/1827392.png",
+      badge: "https://cdn-icons-png.flaticon.com/512/545/545674.png",
+      image: "https://picsum.photos/400/200",
+      vibrate: [200, 100, 200],
+      tag: "demo-notification",
+      renotify: true,
+      requireInteraction: true,
+      silent: false,
+      data: {
+        url: "https://example.com",
+        id: Date.now()
+      },
+      actions: [
+        { action: "open", title: "Open App" },
+        { action: "close", title: "Dismiss" }
+      ]
+    });
+
+    notification.onclick = () => {
+      window.focus();
+      notification.close();
+    };
+
+  } else {
+    alert("Notification permission denied");
+  }
+}
+</script>
+
+</body>
+</html>
