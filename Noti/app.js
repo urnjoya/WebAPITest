@@ -24,8 +24,30 @@ document.getElementById("notifyBtn").addEventListener("click", async () => {
 
   reg.showNotification("PWA Notification", {
     body: "Button click se notification aayi hai",
-    icon: "https://cdn-icons-png.flaticon.com/512/1827/1827392.png",
+    icon: "https://cdn-icons-png.flaticon.com/512/545/545674.png",
     badge: "https://cdn-icons-png.flaticon.com/512/545/545674.png",
+        /* ---------- LANGUAGE & DIRECTION ---------- */
+    lang: "en-US",
+    dir: "ltr",
+
+    /* ---------- BEHAVIOR ---------- */
+    tag: "demo-full-attributes",
+    silent: false,
+    renotify: true,
+    requireInteraction: true,
+
+    /* ---------- DEVICE ---------- */
+    vibrate: [200, 100, 200, 100, 300],
+
+    /* ---------- METADATA ---------- */
+    timestamp: Date.now(),
+
+    /* ---------- CUSTOM DATA ---------- */
+    data: {
+      url: "https://example.com",
+      source: "pwa-demo",
+      userId: 12345
+    },
     vibrate: [200, 100, 200],
     requireInteraction: true,
     actions: [
@@ -34,3 +56,4 @@ document.getElementById("notifyBtn").addEventListener("click", async () => {
     ]
   });
 });
+
